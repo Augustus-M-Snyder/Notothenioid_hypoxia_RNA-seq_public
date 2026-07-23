@@ -1,0 +1,2 @@
+[INFO] Fri Sep 26 17:12:43 AKDT 2025 SPEC=GIB CPUS=8 IN=GIB_cds_longest_per_gene.prot.fa
+./emapper_array.sh: line 39: emapper.py: command not found

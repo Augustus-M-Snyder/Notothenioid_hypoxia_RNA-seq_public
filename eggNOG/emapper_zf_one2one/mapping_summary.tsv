@@ -1,0 +1,6 @@
+species	input_fasta	input_seqs	mapped_any_ids	mapped_gene_ids
+ACE	ACE_cds_longest_per_gene.prot.fa	0	13983	13723
+COR	COR_cds_longest_per_gene.prot.fa	0	13925	13667
+GEO	GEO_cds_longest_per_gene.prot.fa	0	15034	14766
+GIB	GIB_cds_longest_per_gene.prot.fa	0	11468	11276
+MAC	MAC_cds_longest_per_gene.prot.fa	0	15820	15529
