@@ -1,2 +1,30 @@
-eggNOG/out.emapper.orthologs
+# Raw sequencing and alignment data
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.sam
+*.bam
+*.bai
+*.cram
+*.crai
+*.ht2
+*.ht2l
+
+# Local R state and editor files
+.Rhistory
+.RData
+.Rproj.user/
+.Renviron
+.Rprofile
+__pycache__/
+*.pyc
+.DS_Store
+
+# Generated analysis outputs (tracked historic outputs are unaffected)
+edgeR_output/
+mapped_counts/
+slurm-*.out
+
+# Existing eggNOG intermediate exclusion
 eggNOG/out.emapper.orthologs
