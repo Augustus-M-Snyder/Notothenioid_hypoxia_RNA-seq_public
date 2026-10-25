@@ -1,10 +1,6 @@
 # Notothenioid hypoxia RNA-seq
 
-Code and selected analysis files for a comparative study of **heart transcriptomic responses to hypoxia** in Antarctic and sub-Antarctic notothenioid fishes. The repository covers sequencing-read processing, gene-level quantification, differential expression, gene annotation, cross-species orthology and downstream visualization.
-
-**Reproducibility status:** This is a research analysis archive, not a self-contained, one-command pipeline. The main R Markdown notebook requires original sample metadata, count matrices, and local analysis files that are not all deposited here. See [Reproducibility and data requirements](docs/REPRODUCIBILITY.md).
-
-## Study species
+RNA-seq analysis of cardiac responses to hypoxia in five Antarctic and sub-Antarctic notothenioid fishes.
 
 | Code | Species |
 | --- | --- |
@@ -14,52 +10,25 @@ Code and selected analysis files for a comparative study of **heart transcriptom
 | GIB | *Gobionotothen gibberifrons* |
 | MAC | *Eleginops maclovinus* |
 
-The principal comparisons are **Hypoxia vs. Normoxia** and **ILOS vs. Normoxia**. GEO is analyzed for the ILOS contrast only. `ILOS` is the term used in many code objects; some later figures use **ILOP** for the same treatment.
+The study compares normoxia with hypoxia and an additional low-oxygen treatment (ILOP, labeled `ILOS` in the analysis code). GEO includes the ILOP comparison only.
 
 ## Repository contents
 
-| Location | Description |
+| Directory | Contents |
 | --- | --- |
-| [`General_Pipeline/`](General_Pipeline/) | Historical SLURM scripts for read trimming, HISAT2 alignment, index building and featureCounts |
-| [`EdgeR_Analysis/`](EdgeR_Analysis/) | Main edgeR R Markdown analysis, helper functions and count-key mapping to zebrafish ortholog identifiers |
-| [`eggNOG/`](eggNOG/) | eggNOG-mapper commands, annotation outputs and zebrafish orthology tables |
-| [`Misc_Custom_Scripts/`](Misc_Custom_Scripts/) | Supplementary Bash and Python utilities for gene annotations, protein sequences and orthology |
-| [`standardize_to_zf_one2one.R`](standardize_to_zf_one2one.R) | One-to-one zebrafish orthology table construction from eggNOG outputs |
-| [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md) | Input requirements, analysis order, software and known limitations |
+| [`General_Pipeline/`](General_Pipeline/) | Read trimming, HISAT2 alignment and featureCounts scripts |
+| [`EdgeR_Analysis/`](EdgeR_Analysis/) | Differential expression, WGCNA and comparative analyses in R |
+| [`eggNOG/`](eggNOG/) | Orthology mapping and annotation results |
+| [`Misc_Custom_Scripts/`](Misc_Custom_Scripts/) | Additional annotation and sequence-processing utilities |
 
-Some directories contain exploratory or superseded scripts as well as later revisions; a filename alone should not be treated as proof that it produced a particular result.
+## Analysis
 
-## Analysis overview
+The principal analysis is [`Ant_fish_RNA-seq_L2FC=0_revised.Rmd`](EdgeR_Analysis/Ant_fish_RNA-seq_L2FC=0_revised.Rmd), supported by [`rnaseq_helpers_revised.R`](EdgeR_Analysis/rnaseq_helpers_revised.R) and [`Map_to_zf.R`](EdgeR_Analysis/Map_to_zf.R).
 
-```text
-Paired-end RNA-seq FASTQs
-  → adapter/quality trimming (BBDuk, Trimmomatic)
-  → genome indexing and alignment (HISAT2)
-  → gene-level fragment counting (featureCounts)
-  → per-species differential expression (edgeR)
-  → annotation and zebrafish orthology mapping (eggNOG)
-  → within-/cross-species comparisons, enrichment and figures
-```
+The workflow includes read processing, gene-level quantification, edgeR differential expression, zebrafish ortholog mapping, functional enrichment and visualization.
 
-The main expression-analysis files are:
-
-- [`EdgeR_Analysis/Ant_fish_RNA-seq_L2FC=0_revised.Rmd`](EdgeR_Analysis/Ant_fish_RNA-seq_L2FC=0_revised.Rmd) — RNA-seq QC, species-specific differential expression and downstream analyses.
-- [`EdgeR_Analysis/rnaseq_helpers_revised.R`](EdgeR_Analysis/rnaseq_helpers_revised.R) — functions called by the notebook.
-- [`EdgeR_Analysis/Map_to_zf.R`](EdgeR_Analysis/Map_to_zf.R) — count-table gene keys to `DrOrtholog` mapping for cross-species comparisons.
-
-In the version of the edgeR helpers currently deposited, the species-level model uses a treatment-only design (`~0 + treatment`), the control is Normoxia, and significance is evaluated at **FDR ≤ 0.05**, without a minimum absolute log2 fold-change threshold. The helper's initial count filter retains features with a mean count of at least 20. The notebook also contains additional and exploratory analyses; consult the code for the settings used in each section.
-
-## Reuse
-
-1. Obtain the corresponding FASTQs, genome assemblies/annotations, sample sheet, and species-level gene-count tables.
-2. Install the versions of the command-line tools and R/Bioconductor packages required by the scripts.
-3. Adapt the site-specific SLURM settings and absolute Windows/Chinook paths before execution.
-4. Review [reproducibility requirements](docs/REPRODUCIBILITY.md) and run the analysis in stages, checking intermediate results.
-
-**Important:** The R Markdown notebook is not expected to knit directly after cloning: it loads an external `.RData` workspace and references data files outside this repository. The committed eggNOG results support inspection of annotation and orthology outputs, but do not substitute for the original RNA-seq input data.
+Some analysis inputs and saved R objects are not included, and local file paths require adjustment before running the code. See [Reproducibility and data requirements](docs/REPRODUCIBILITY.md) for details.
 
 ## Citation
 
-Project code maintained by Augustus M. Snyder. Manuscript citation, raw-data accessions and verified software versions should be added when available.
-
-The R Markdown analysis acknowledges code adapted from [Schweizer et al. (2023)](https://github.com/renaschweizer/pman_diaphragm_rnaseq).
+Analysis by Augustus M. Snyder. Portions of the R workflow were adapted from [Schweizer et al. (2023)](https://github.com/renaschweizer/pman_diaphragm_rnaseq).
