@@ -1,6 +1,6 @@
 # Notothenioid hypoxia RNA-seq
 
-Code and selected analysis files for a comparative RNA-seq study of hypoxia responses in Antarctic and sub-Antarctic notothenioid fishes. The repository covers sequencing-read processing, gene-level quantification, differential expression, gene annotation, cross-species orthology and downstream visualization.
+Code and selected analysis files for a comparative study of **heart transcriptomic responses to hypoxia** in Antarctic and sub-Antarctic notothenioid fishes. The repository covers sequencing-read processing, gene-level quantification, differential expression, gene annotation, cross-species orthology and downstream visualization.
 
 **Reproducibility status:** This is a research analysis archive, not a self-contained, one-command pipeline. The main R Markdown notebook requires original sample metadata, count matrices, and local analysis files that are not all deposited here. See [Reproducibility and data requirements](docs/REPRODUCIBILITY.md).
 
